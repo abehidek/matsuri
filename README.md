@@ -15,6 +15,7 @@
 <p align="center">
   <!-- <a href="#about">About</a> • -->
   <!-- <a href="#key-features">Key Features</a> • -->
+  <a href="#development">Development</a> •
   <a href="#getting-started">Getting Started</a> •
   <a href="#faq">FAQ</a> •
   <a href="#roadmap">Roadmap</a> •
@@ -35,6 +36,19 @@ Simple overview of use/purpose.
   - Feature 2.1
   - Feature 2.2
 - Feature 3 -->
+
+## Development
+
+### Drafts
+
+- A normal user can Sign up and Sign in
+- A normal user can see it's own notes
+- A normal user can create a new note
+- A normal user can edit it a note using markdown
+- A normal user have it's note saved automatically
+- A normal user share a note with other users
+  - Sharing can be done in two ways: "view only" and "write and read"
+  - Shared with users can be seen in a panel
 
 ## Roadmap
 
