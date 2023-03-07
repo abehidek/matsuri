@@ -1,0 +1,7 @@
+FROM node:16-bullseye
+
+RUN npm i -g pnpm
+
+WORKDIR /monorepo
+
+CMD [ "sleep", "infinity" ]

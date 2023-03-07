@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  monorepo:
+    build:
+      context: ./
+      dockerfile: dockerfile.dev
+    restart: always
+    ports:
+      - 127.0.0.1:3000:3000  # Web
+      - 127.0.0.1:3001:3001  # Docs
+    environment:
+      - DOCKER=true
+    volumes:
+      - ./:/monorepo
