@@ -9,15 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.26.1",
+    "@trpc/client": "^10.14.1",
+    "@trpc/server": "^10.14.1",
+    "env": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "env": "workspace:*"
+    "superjson": "^1.12.2"
   },
   "devDependencies": {
-    "tsconfig": "workspace:*",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "tsconfig": "workspace:*",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-plugin-environment": "^1.1.3"
