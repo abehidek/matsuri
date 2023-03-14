@@ -3,8 +3,8 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 import superjson from 'superjson';
 
 export const createContext = ({
-  req,
-  res,
+  req: _req,
+  res: _res,
 }: trpcExpress.CreateExpressContextOptions) => ({}); // no context
 type Context = inferAsyncReturnType<typeof createContext>;
 
