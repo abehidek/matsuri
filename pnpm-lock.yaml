@@ -15,6 +15,31 @@ importers:
       prettier: 2.8.4
       turbo: 1.8.3
 
+  apps/auth:
+    specifiers:
+      '@types/cors': ^2.8.13
+      '@types/express': ^4.17.17
+      '@types/node': ^18.15.0
+      cors: ^2.8.5
+      env: workspace:*
+      eslint-config-custom: workspace:*
+      express: ^4.18.2
+      tsconfig: workspace:*
+      tsx: ^3.12.3
+      zod: ^3.21.4
+    dependencies:
+      cors: 2.8.5
+      env: link:../../packages/env
+      express: 4.18.2
+      tsx: 3.12.3
+      zod: 3.21.4
+    devDependencies:
+      '@types/cors': 2.8.13
+      '@types/express': 4.17.17
+      '@types/node': 18.15.0
+      eslint-config-custom: link:../../packages/eslint-config-custom
+      tsconfig: link:../../packages/tsconfig
+
   apps/server:
     specifiers:
       '@trpc/server': ^10.14.1
