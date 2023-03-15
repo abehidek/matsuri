@@ -134,6 +134,17 @@ importers:
       tsconfig: link:../tsconfig
       typescript: 4.9.5
 
+  packages/utils:
+    specifiers:
+      '@types/node': ^18.15.0
+      tsconfig: workspace:*
+      zod: ^3.21.4
+    dependencies:
+      zod: 3.21.4
+    devDependencies:
+      '@types/node': 18.15.0
+      tsconfig: link:../tsconfig
+
 packages:
 
   /@babel/code-frame/7.12.11:
