@@ -1,6 +1,6 @@
 import { env } from 'env'
 import { useQuery } from '@tanstack/react-query';
-import { api } from './utils/trpc';
+import { api } from '../utils/trpc';
 
 const App: React.FC = () => {
   console.log("client environment variables:", env);
