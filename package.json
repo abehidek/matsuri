@@ -10,7 +10,11 @@
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
     "lint": "dotenv -- turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:push": "dotenv -- turbo run db:push",
+    "db:pull": "dotenv -- turbo run db:pull",
+    "db:generate": "dotenv -- turbo run db:generate",
+    "db:seed": "dotenv -- turbo run db:seed"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

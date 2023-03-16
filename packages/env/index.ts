@@ -6,7 +6,8 @@ type NodeEnvironment = z.infer<typeof nodeEnvironmentSchema>
 const serverSchema = z.object({
   NODE_ENV: nodeEnvironmentSchema,
   TEST_1: z.string(),
-  TEST_2: z.string().nullable()
+  TEST_2: z.string().nullable(),
+  SERVER_DATABASE_URL: z.string()
 })
 
 const publicSchema = z.object({
@@ -28,6 +29,7 @@ const processEnv: {
   TEST_2: null,
   PUBLIC_TEST_1: process.env.PUBLIC_TEST_1,
   PUBLIC_TEST_2: Number(process.env.PUBLIC_TEST_2),
+  SERVER_DATABASE_URL: process.env.SERVER_DATABASE_URL
 }
 
 const isServer = typeof window === "undefined";

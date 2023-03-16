@@ -1,11 +1,13 @@
 import { inferAsyncReturnType, initTRPC } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import superjson from 'superjson';
+import { prisma } from '../prisma/client';
 
-export const createContext = ({
-  req: _req,
-  res: _res,
-}: trpcExpress.CreateExpressContextOptions) => ({}); // no context
+export const createContext = async ({ req: _req, res: _res, }: trpcExpress.CreateExpressContextOptions) => {
+  return {
+    prisma
+  }
+};
 type Context = inferAsyncReturnType<typeof createContext>;
 
 const t = initTRPC.context<Context>().create({
