@@ -69,6 +69,9 @@ Simple overview of use/purpose.
 - [ ] feat: sign in/sign out ui
 - [ ] chore: logger service (for metrics)
 - [ ] chore: storage service
+- [ ] chore: tailwind monorepo config
+- [ ] feat: do ui library on-demand using shadcn/ui components (React + Tailwindcss + Radix UI)
+- [ ] chore: sdk for all services
 
 ## Getting Started
 
