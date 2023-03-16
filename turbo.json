@@ -19,6 +19,15 @@
     "dev": {
       "cache": false
     },
+    "test": {
+      "cache": false
+    },
+    "test:watch": {
+      "cache": false
+    },
+    "coverage": {
+      "cache": false
+    },
     "db:push": {
       "cache": false
     },
