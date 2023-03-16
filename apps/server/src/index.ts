@@ -3,9 +3,9 @@ import cors from 'cors'
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { createContext } from './trpc';
 import { appRouter } from './router/root';
+import { env } from 'env';
 
 const app = express();
-const PORT = 4000;
 
 app.use(cors())
 app.use(express.json())
@@ -15,6 +15,6 @@ app.use("/trpc", trpcExpress.createExpressMiddleware({
   createContext
 }))
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(env.PUBLIC_SERVER_PORT, () => {
+  console.log(`Server running on port ${env.PUBLIC_SERVER_PORT}`);
 })

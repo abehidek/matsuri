@@ -3,18 +3,18 @@ import react from '@vitejs/plugin-react'
 import envp from 'vite-plugin-environment'
 import generouted from '@generouted/react-router'
 
-//@ts-ignore
+//@ts-ignore: vite tsconfig rootDir error, but it works perfectly
 import { env } from '../../packages/env/index';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  //@ts-ignore
+  //@ts-ignore: ignore env type errors (because there are some number environment variables)
   plugins: [react(), generouted(), envp(env, {
     loadEnvFiles: false
   })],
   server: {
     host: true,
-    port: 3000,
+    port: env.PUBLIC_WEB_PORT,
     strictPort: true
   }
 })

@@ -13,7 +13,16 @@ const serverSchema = z.object({
 
 const publicSchema = z.object({
   PUBLIC_TEST_1: z.string(),
-  PUBLIC_TEST_2: z.number()
+  PUBLIC_TEST_2: z.number(),
+  // Web1
+  PUBLIC_WEB_URL: z.string(),
+  PUBLIC_WEB_PORT: z.number(),
+  // Server
+  PUBLIC_SERVER_URL: z.string(),
+  PUBLIC_SERVER_PORT: z.number(),
+  // Auth
+  PUBLIC_AUTH_URL: z.string(),
+  PUBLIC_AUTH_PORT: z.number(),
 })
 
 const mergedSchema = publicSchema.merge(serverSchema)
@@ -30,8 +39,18 @@ const processEnv: {
   TEST_2: null,
   PUBLIC_TEST_1: process.env.PUBLIC_TEST_1,
   PUBLIC_TEST_2: Number(process.env.PUBLIC_TEST_2),
+
+  // Web
+  PUBLIC_WEB_URL: process.env.PUBLIC_WEB_URL || "http://localhost:3000",
+  PUBLIC_WEB_PORT: Number(process.env.PUBLIC_WEB_PORT) || 3000,
+  // Server
+  PUBLIC_SERVER_URL: process.env.PUBLIC_SERVER_URL || "http://localhost:4000",
+  PUBLIC_SERVER_PORT: Number(process.env.PUBLIC_SERVER_PORT) || 4000,
   SERVER_DATABASE_URL: process.env.SERVER_DATABASE_URL,
-  AUTH_DATABASE_URL: process.env.AUTH_DATABASE_URL
+  // Auth
+  PUBLIC_AUTH_URL: process.env.PUBLIC_AUTH_URL || "http://localhost:5000",
+  PUBLIC_AUTH_PORT: Number(process.env.PUBLIC_AUTH_PORT) || 5000,
+  AUTH_DATABASE_URL: process.env.AUTH_DATABASE_URL,
 }
 
 const isServer = typeof window === "undefined";
