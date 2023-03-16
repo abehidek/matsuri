@@ -9,13 +9,19 @@
     "lint": "eslint src/*.ts*",
     "test": "vitest run",
     "test:watch": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "db:push": "prisma db push",
+    "db:pull": "prisma db pull",
+    "db:generate": "prisma generate",
+    "db:seed": "prisma db seed"
   },
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^4.11.0",
     "cors": "^2.8.5",
     "env": "workspace:*",
     "express": "^4.18.2",
+    "prisma": "^4.11.0",
     "tsx": "^3.12.3",
     "zod": "^3.21.4"
   },
@@ -29,5 +35,8 @@
     "supertest": "^6.3.3",
     "tsconfig": "workspace:*",
     "vitest": "^0.29.3"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
