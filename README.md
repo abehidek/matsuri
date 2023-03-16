@@ -53,7 +53,17 @@ Simple overview of use/purpose.
 ## Roadmap
 
 - [x] Add this README.
-- [ ] Finish the unicorn project.
+- [ ] chore: setup tests properly
+- [ ] chore: setup CI
+- [ ] feat: finish session-based authentication microservice (see keycloak standards?)
+- [ ] chore: add TRPCError like error handler for express
+- [ ] feat: crud notes (development UI-first w/ tRPC)
+  - [ ] feat: find/develop a good markdown editor
+- [ ] feat: share notes w/ other users
+- [ ] chore: tRPC protectedProcedure
+- [ ] feat: sign in/sign out ui
+- [ ] chore: logger service (for metrics)
+- [ ] chore: storage service
 
 ## Getting Started
 
@@ -61,9 +71,8 @@ This is an example of how you may give instructions on setting up your project l
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
+- Node.js
+- pnpm
 
 ### Installing and Running
 
@@ -71,10 +80,16 @@ Below is an example of how you can instruct your audience on installing and sett
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/[your-github-user]/[your-repository-name]
+$ git clone https://github.com/abehidek/matsuri
 
 # Go into the repository
-$ cd [your-repository-name]
+$ cd matsuri
+
+# Install all dependencies
+$ pnpm install
+
+# Run the project
+$ pnpm dev
 ```
 
 ## FAQ
@@ -85,7 +100,7 @@ $ cd [your-repository-name]
 
 ## Emailware
 
-[Project's name] is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <your-email@email.com> about anything you'd want to say about this software. I'd really appreciate it!
+[Project's name] is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <hidek.abe@outlook.com> about anything you'd want to say about this software. I'd really appreciate it!
 
 ## Contributing
 
