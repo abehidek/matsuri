@@ -13,3 +13,5 @@ app.use(authRouter)
 app.listen(PORT, () => {
   console.log(`[Auth]: Server running on port ${PORT}`);
 })
+
+export { app }

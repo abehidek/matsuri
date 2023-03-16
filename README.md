@@ -55,7 +55,9 @@ Simple overview of use/purpose.
 - [x] Add this README.
 - [-] chore: setup tests properly
   - [x] server
-  - [ ] auth
+  - [-] auth
+    - [x] basic setup
+    - [ ] abstraction for testing together in other services
   - [ ] web
 - [ ] chore: setup CI
 - [ ] feat: finish session-based authentication microservice (see keycloak standards?)
