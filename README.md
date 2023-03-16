@@ -53,7 +53,10 @@ Simple overview of use/purpose.
 ## Roadmap
 
 - [x] Add this README.
-- [ ] chore: setup tests properly
+- [-] chore: setup tests properly
+  - [x] server
+  - [ ] auth
+  - [ ] web
 - [ ] chore: setup CI
 - [ ] feat: finish session-based authentication microservice (see keycloak standards?)
 - [ ] chore: add TRPCError like error handler for express
