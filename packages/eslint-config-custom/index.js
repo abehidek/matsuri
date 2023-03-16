@@ -17,6 +17,10 @@ module.exports = {
   rules: {
     "turbo/no-undeclared-env-vars": "off",
     "no-unused-vars": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      { "ts-ignore": "allow-with-description" },
+    ],
     "@typescript-eslint/no-unused-vars": [
       "warn", // or "error"
       {
