@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "lint": "eslint src/*.ts*",
-    "test:run": "vitest run",
-    "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
+    "test:run": "pnpm db:push:reset && vitest run",
+    "test:json": "pnpm db:push:reset && vitest run --reporter=json --outputFile vitest/result.log",
+    "test:watch": "pnpm db:push:reset && vitest watch",
+    "test:coverage": "pnpm db:push:reset && vitest run --coverage",
     "db:push": "prisma db push",
     "db:push:reset": "prisma db push --force-reset",
     "db:pull": "prisma db pull",

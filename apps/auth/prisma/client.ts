@@ -13,4 +13,9 @@ export const prisma =
 
 export { type User };
 
+export const reset = async () => {
+  await prisma.session.deleteMany();
+  await prisma.user.deleteMany();
+};
+
 if (env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
