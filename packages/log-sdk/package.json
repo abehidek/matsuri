@@ -1,0 +1,20 @@
+{
+  "name": "log-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint lib/*.ts*"
+  },
+  "dependencies": {
+    "utils": "workspace:*",
+    "env": "workspace:*"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -5,11 +5,7 @@ import router from "./router";
 
 const app = express();
 
-const ALLOWED_ORIGINS: string[] = [
-  env.PUBLIC_SERVER_URL,
-  env.PUBLIC_WEB_URL,
-  env.PUBLIC_AUTH_URL,
-];
+const ALLOWED_ORIGINS: string[] = [env.PUBLIC_SERVER_URL, env.PUBLIC_AUTH_URL];
 
 app.use(
   cors({

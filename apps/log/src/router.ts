@@ -33,12 +33,12 @@ router.get("/", async (req, res) => {
   return res.status(200).json({ logs });
 });
 
-const ALLOWED_APPS = ["auth", "server", "web", "log"] as const;
-const TYPE_NAMES = ["error", "auth:sign-in", "auth:sign-up"] as const;
+const ALLOWED_APPS = ["auth", "server", "log"] as const;
+const TYPE_NAMES = ["error", "test", "auth:start"] as const;
 
 const createLogSchema = z.object({
   appName: z.enum(ALLOWED_APPS),
-  typeName: z.enum(TYPE_NAMES),
+  typeName: z.enum(TYPE_NAMES).optional(),
   message: z.string(),
 });
 

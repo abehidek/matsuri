@@ -67,11 +67,12 @@ Simple overview of use/purpose.
 - [ ] feat: share notes w/ other users
 - [ ] chore: tRPC protectedProcedure
 - [ ] feat: sign in/sign out ui
-- [ ] chore: logger service (for metrics)
+- [x] chore: logger service (for metrics)
 - [ ] chore: storage service
 - [ ] chore: tailwind monorepo config
 - [ ] feat: do ui library on-demand using shadcn/ui components (React + Tailwindcss + Radix UI)
-- [ ] chore: sdk for all services
+- [-] chore: sdk for all services
+  - [x] Log
 - [x] bug: fix pnpm test env loader in turborepo cli
 
 ## Getting Started

@@ -40,8 +40,8 @@ describe("POST /", () => {
   test("Should work by sending correct info", async () => {
     const newLogResponse = await supertest(app).post("/").send({
       appName: "auth",
-      typeName: "auth:sign-in",
-      message: "User succesfully",
+      typeName: "test",
+      message: "Message created on log router.spec.ts test",
     });
     expect(newLogResponse.statusCode).toBe(200);
     expect(newLogResponse.body).toHaveProperty("message");

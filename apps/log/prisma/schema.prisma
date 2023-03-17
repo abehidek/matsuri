@@ -14,7 +14,7 @@ datasource db {
 model Log {
   id        String   @id @default(cuid())
   appName   String
-  typeName  String
+  typeName  String?
   message   String
   createdAt DateTime @default(now())
 }
