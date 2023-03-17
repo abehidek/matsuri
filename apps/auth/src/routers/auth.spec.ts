@@ -11,7 +11,33 @@ beforeEach(async () => {
 });
 
 const getCookieHeader = (res: supertest.Response) => {
-  return res.headers["set-cookie"]![0].split(";")[0].split("=")[1];
+  return res.headers["set-cookie"][0].split(";")[0].split("=")[1];
+};
+
+const getSignedInUser = async () => {
+  const user = await prisma.user.create({
+    data: {
+      name: "Test user",
+      email: "test@email.com",
+      passwordHash: await hashPassword("correct-password"),
+    },
+  });
+
+  const signInResponse = await supertest(app).post("/signin").send({
+    email: "test@email.com",
+    password: "correct-password",
+  });
+
+  expect(signInResponse.statusCode).toBe(201);
+  expect(signInResponse.headers).toHaveProperty("set-cookie");
+  expect(signInResponse.body).toHaveProperty("message");
+
+  const signInCookie = getCookieHeader(signInResponse);
+
+  return {
+    user,
+    signInCookie,
+  };
 };
 
 describe("POST /signin", () => {
@@ -33,22 +59,7 @@ describe("POST /signin", () => {
   });
 
   test("Should work by sending valid credentials", async () => {
-    await prisma.user.create({
-      data: {
-        name: "Test user",
-        email: "test@email.com",
-        passwordHash: await hashPassword("correct-password"),
-      },
-    });
-
-    const res = await supertest(app).post("/signin").send({
-      email: "test@email.com",
-      password: "correct-password",
-    });
-
-    expect(res.statusCode).toBe(201);
-    expect(res.headers).toHaveProperty("set-cookie");
-    expect(res.body).toHaveProperty("message");
+    await getSignedInUser();
   });
 });
 
@@ -70,24 +81,7 @@ describe("GET /me", () => {
   });
 
   test("Should work by sending a valid sessionId", async () => {
-    await prisma.user.create({
-      data: {
-        name: "Test user",
-        email: "test@email.com",
-        passwordHash: await hashPassword("correct-password"),
-      },
-    });
-
-    const signInResponse = await supertest(app).post("/signin").send({
-      email: "test@email.com",
-      password: "correct-password",
-    });
-
-    expect(signInResponse.statusCode).toBe(201);
-    expect(signInResponse.headers).toHaveProperty("set-cookie");
-    expect(signInResponse.body).toHaveProperty("message");
-
-    const signInCookie = getCookieHeader(signInResponse);
+    const { signInCookie } = await getSignedInUser();
 
     const meResponse = await supertest(app)
       .get("/me")
@@ -116,24 +110,7 @@ describe("DELETE /signout", () => {
   });
 
   test("Should work by sending a valid sessionId", async () => {
-    await prisma.user.create({
-      data: {
-        name: "Test user",
-        email: "test@email.com",
-        passwordHash: await hashPassword("correct-password"),
-      },
-    });
-
-    const signInResponse = await supertest(app).post("/signin").send({
-      email: "test@email.com",
-      password: "correct-password",
-    });
-
-    expect(signInResponse.statusCode).toBe(201);
-    expect(signInResponse.headers).toHaveProperty("set-cookie");
-    expect(signInResponse.body).toHaveProperty("message");
-
-    const signInCookie = getCookieHeader(signInResponse);
+    const { signInCookie } = await getSignedInUser();
 
     const signOutResponse = await supertest(app)
       .delete("/signout")
