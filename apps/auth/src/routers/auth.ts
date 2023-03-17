@@ -103,7 +103,7 @@ const SESSION_COOKIE_OPTS: CookieOptions = {
   maxAge: SESSION_COOKIE_MAX_AGE,
   signed: false,
   sameSite: "lax",
-  domain: env.DOMAIN_URL,
+  domain: env.DOMAIN_URL ? env.DOMAIN_URL : undefined,
 };
 
 router.post("/signin", async (req, res) => {

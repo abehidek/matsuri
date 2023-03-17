@@ -55,12 +55,12 @@ Simple overview of use/purpose.
 - [x] Add this README.
 - [-] chore: setup tests properly
   - [x] server
-  - [-] auth
+  - [x] auth
     - [x] basic setup
-    - [ ] abstraction for testing together in other services
+    - [x] abstraction for testing together in other services
   - [ ] web
 - [ ] chore: setup CI
-- [ ] feat: finish session-based authentication microservice (see keycloak standards?)
+- [-] feat: finish session-based authentication microservice (see keycloak standards?)
 - [ ] chore: add TRPCError like error handler for express
 - [ ] feat: crud notes (development UI-first w/ tRPC)
   - [ ] feat: find/develop a good markdown editor

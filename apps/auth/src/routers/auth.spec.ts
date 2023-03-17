@@ -4,7 +4,6 @@ import { app } from "src";
 import { reset } from "prisma/client";
 import { prisma } from "../../prisma/client";
 import { hashPassword } from "src/lib/password";
-import { AxiosResponse } from "axios";
 
 beforeEach(async () => {
   await reset();
