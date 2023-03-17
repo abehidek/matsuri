@@ -8,6 +8,8 @@ node_modules
 
 # testing
 coverage
+vitest
+.log
 
 # next.js
 .next/
@@ -39,3 +41,4 @@ yarn-error.log*
 
 # runtime
 *.db
+*.db-journal

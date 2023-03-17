@@ -72,6 +72,7 @@ Simple overview of use/purpose.
 - [ ] chore: tailwind monorepo config
 - [ ] feat: do ui library on-demand using shadcn/ui components (React + Tailwindcss + Radix UI)
 - [ ] chore: sdk for all services
+- [x] bug: fix pnpm test env loader in turborepo cli
 
 ## Getting Started
 

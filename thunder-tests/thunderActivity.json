@@ -1,0 +1,40 @@
+[
+  {
+    "_id": "0882c35d-3e71-4b60-bc2c-cfa0506cf6cc",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:5001",
+    "url": "localhost:5001",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-16T23:30:48.168Z",
+    "modified": "2023-03-16T23:39:48.182Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"appName\": \"auth\",\n  \"typeName\": \"auth:sign-in\",\n  \"message\": \"User succesfully\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c40b0cda-6237-4bce-ac96-60e9697b4211",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:5001",
+    "url": "localhost:5001",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-16T23:39:54.880Z",
+    "modified": "2023-03-16T23:39:54.880Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"appName\": \"auth\",\n  \"typeName\": \"auth:sign-in\",\n  \"message\": \"User succesfully\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

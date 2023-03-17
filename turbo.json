@@ -19,16 +19,26 @@
     "dev": {
       "cache": false
     },
-    "test": {
+    "test:run": {
       "cache": false
+    },
+    "test:json": {
+      "outputs": [
+        "vitest/**"
+      ]
     },
     "test:watch": {
       "cache": false
     },
-    "coverage": {
-      "cache": false
+    "test:coverage": {
+      "outputs": [
+        "coverage/**"
+      ]
     },
     "db:push": {
+      "cache": false
+    },
+    "db:push:reset": {
       "cache": false
     },
     "db:pull": {

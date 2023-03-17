@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "lint": "eslint src/*.ts*",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "coverage": "vitest run --coverage",
+    "test:run": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
     "db:push": "prisma db push",
     "db:pull": "prisma db pull",
     "db:generate": "prisma generate",
