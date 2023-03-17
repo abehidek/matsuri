@@ -39,7 +39,7 @@ export const authenticate = async (
 
   const { sessionId } = parseResult.data;
 
-  const [session, sessionUser] = await $try(
+  const [session, sessionError] = await $try(
     prisma.session.findUnique({
       where: {
         id: sessionId,
@@ -47,9 +47,9 @@ export const authenticate = async (
     })
   );
 
-  if (sessionUser) {
+  if (sessionError) {
     logger.log("Failed to fetch session", "auth:auth");
-    console.error(sessionUser);
+    console.error(sessionError);
     return res.status(500).json({
       message: "Failed to fetch session",
     });
@@ -71,7 +71,7 @@ export const authenticate = async (
 
   if (userError) {
     logger.log("Failed to fetch user", "auth:auth");
-    console.error(sessionUser);
+    console.error(sessionError);
     return res.status(500).json({
       message: "Failed to fetch user",
     });
@@ -91,7 +91,7 @@ export const authenticate = async (
 router.get("/me", authenticate, (req: AuthRequest, res) => {
   const user = req.user as User;
 
-  return res.json({
+  return res.status(200).json({
     user,
     message: "Succesfully retrieve user",
   });
@@ -147,7 +147,7 @@ router.post("/signin", async (req, res) => {
   }
 
   if (!user)
-    return res.status(404).json({ message: "This user does not exists" });
+    return res.status(401).json({ message: "Wrong email or password" });
 
   const [isPasswordValid, isPasswordValidError] = await $try(
     comparePassword(password, user.passwordHash)
@@ -183,7 +183,7 @@ router.post("/signin", async (req, res) => {
   logger.log("User sign-in", "auth:sign-in");
   return res
     .cookie("sessionId", session.id, SESSION_COOKIE_OPTS)
-    .status(200)
+    .status(201)
     .json({ message: "User session created succesfully" });
 });
 
