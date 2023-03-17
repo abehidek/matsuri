@@ -5,7 +5,7 @@ import authRouter from "./routers/auth";
 import { env } from "env";
 import { LogClient } from "log-sdk";
 
-const logger = new LogClient({
+export const logger = new LogClient({
   appName: "auth",
 });
 

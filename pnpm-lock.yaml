@@ -38,6 +38,7 @@ importers:
       supertest: ^6.3.3
       tsconfig: workspace:*
       tsx: ^3.12.3
+      utils: workspace:*
       vitest: ^0.29.3
       zod: ^3.21.4
     dependencies:
@@ -50,6 +51,7 @@ importers:
       log-sdk: link:../../packages/log-sdk
       prisma: 4.11.0
       tsx: 3.12.3
+      utils: link:../../packages/utils
       zod: 3.21.4
     devDependencies:
       '@types/bcryptjs': 2.4.2

@@ -1,4 +1,4 @@
-import { PrismaClient } from "../node_modules/.prisma/client";
+import { PrismaClient, User } from "../node_modules/.prisma/client";
 
 import { env } from "env";
 
@@ -10,5 +10,7 @@ export const prisma =
     log:
       env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });
+
+export { type User };
 
 if (env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

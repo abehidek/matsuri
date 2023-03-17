@@ -5,6 +5,7 @@ type NodeEnvironment = z.infer<typeof nodeEnvironmentSchema>;
 
 const serverSchema = z.object({
   NODE_ENV: nodeEnvironmentSchema,
+  DOMAIN_URL: z.string().optional(),
   SERVER_DATABASE_URL: z.string(),
   AUTH_DATABASE_URL: z.string(),
   LOG_DATABASE_URL: z.string(),
@@ -37,6 +38,7 @@ const processEnv: {
     | undefined;
 } = {
   NODE_ENV: (process.env.NODE_ENV as NodeEnvironment) || "development",
+  DOMAIN_URL: process.env.DOMAIN_URL,
 
   // Web
   PUBLIC_WEB_URL: process.env.PUBLIC_WEB_URL || "http://localhost:3000",

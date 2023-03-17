@@ -12,10 +12,20 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  bio       String
-  avatarUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String    @id @default(cuid())
+  name         String
+  bio          String?
+  avatarUrl    String?
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Session      Session[]
+}
+
+model Session {
+  id     String @id @default(cuid())
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
 }

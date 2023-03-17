@@ -1,11 +1,213 @@
-import express from 'express'
+import express, {
+  CookieOptions,
+  type NextFunction,
+  type Request,
+  type Response,
+} from "express";
+import { logger } from "src";
+import { $try } from "utils";
+import { z } from "zod";
+import { User, prisma } from "../../prisma/client";
+import { comparePassword } from "src/lib/password";
+import { env } from "env";
 
 const router = express.Router();
 
-router.get("/me", (req, res) => {
+type AuthRequest = Request & {
+  user?: User;
+  sessionId?: string;
+};
+
+export const authenticate = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  logger.log("Authentication middleware", "auth:auth");
+  const parseResult = z
+    .object({
+      sessionId: z.string().min(1),
+    })
+    .safeParse(req.cookies);
+
+  if (!parseResult.success) {
+    return res.status(400).json({
+      message: "Failed to parse request cookies",
+      error: parseResult.error.format(),
+    });
+  }
+
+  const { sessionId } = parseResult.data;
+
+  const [session, sessionUser] = await $try(
+    prisma.session.findUnique({
+      where: {
+        id: sessionId,
+      },
+    })
+  );
+
+  if (sessionUser) {
+    logger.log("Failed to fetch session", "auth:auth");
+    console.error(sessionUser);
+    return res.status(500).json({
+      message: "Failed to fetch session",
+    });
+  }
+
+  if (!session) {
+    return res.status(404).json({
+      message: "Session not found",
+    });
+  }
+
+  const [user, userError] = await $try(
+    prisma.user.findUnique({
+      where: {
+        id: session.userId,
+      },
+    })
+  );
+
+  if (userError) {
+    logger.log("Failed to fetch user", "auth:auth");
+    console.error(sessionUser);
+    return res.status(500).json({
+      message: "Failed to fetch user",
+    });
+  }
+
+  if (!user) {
+    return res.status(404).json({
+      message: "User not founded",
+    });
+  }
+
+  req.sessionId = sessionId;
+  req.user = user;
+  next();
+};
+
+router.get("/me", authenticate, (req: AuthRequest, res) => {
+  const user = req.user as User;
+
   return res.json({
-    message: "Hello World"
-  })
+    user,
+    message: "Succesfully retrieve user",
+  });
+});
+
+const SESSION_COOKIE_MAX_AGE = 1000 * 60 * 60 * 24;
+const SESSION_COOKIE_OPTS: CookieOptions = {
+  httpOnly: true,
+  maxAge: SESSION_COOKIE_MAX_AGE,
+  signed: false,
+  sameSite: "lax",
+  domain: env.DOMAIN_URL,
+};
+
+router.post("/signin", async (req, res) => {
+  console.log(req.cookies);
+  if ("sessionId" in req.cookies) {
+    return res.status(400).json({
+      message: "Already authenticated",
+    });
+  }
+
+  const parseResult = z
+    .object({
+      email: z.string().min(1).email(),
+      password: z.string().min(6),
+    })
+    .safeParse(req.body);
+
+  if (!parseResult.success) {
+    return res.status(400).json({
+      message: "Failed to parse request cookies",
+      error: parseResult.error.format(),
+    });
+  }
+
+  const { email, password } = parseResult.data;
+
+  const [user, userError] = await $try(
+    prisma.user.findUnique({
+      where: {
+        email,
+      },
+    })
+  );
+
+  if (userError) {
+    logger.log("Failed to fetch user", "auth:sign-in");
+    console.error(userError);
+    return res.status(500).json({
+      message: "Failed to fetch user",
+    });
+  }
+
+  if (!user)
+    return res.status(404).json({ message: "This user does not exists" });
+
+  const [isPasswordValid, isPasswordValidError] = await $try(
+    comparePassword(password, user.passwordHash)
+  );
+
+  if (isPasswordValidError) {
+    logger.log("Failed to verify user password", "auth:sign-in");
+    console.error(isPasswordValidError);
+    return res.status(500).json({
+      message: "Failed to verify password",
+    });
+  }
+
+  if (!isPasswordValid)
+    return res.status(401).json({
+      message: "Wrong email or password",
+    });
+
+  const [session, sessionError] = await $try(
+    prisma.session.create({
+      data: {
+        userId: user.id,
+      },
+    })
+  );
+
+  if (sessionError) {
+    logger.log("Failed to create user session", "auth:sign-in");
+    console.error(sessionError);
+    return res.status(500).json({ message: "Failed to create user session" });
+  }
+
+  logger.log("User sign-in", "auth:sign-in");
+  return res
+    .cookie("sessionId", session.id, SESSION_COOKIE_OPTS)
+    .status(200)
+    .json({ message: "User session created succesfully" });
+});
+
+router.delete("/signout", authenticate, async (req: AuthRequest, res) => {
+  const [_, sessionError] = await $try(
+    prisma.session.delete({
+      where: {
+        id: req.sessionId,
+      },
+    })
+  );
+
+  if (sessionError) {
+    logger.log("Failed to sign out", "auth:sign-out");
+    console.error(sessionError);
+    return res.clearCookie("sessionId").status(500).json({
+      message: "Failed to sign out",
+    });
+  }
+
+  return res
+    .clearCookie("sessionId")
+    .status(200)
+    .json({ message: "Sign out succesfully" });
 });
 
 export default router;

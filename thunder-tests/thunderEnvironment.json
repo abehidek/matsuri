@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "ae28d4c5-6655-486a-8881-7911a1341f29",
+    "name": "Matsuri",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2023-03-17T14:07:33.247Z",
+    "modified": "2023-03-17T14:07:33.247Z",
+    "data": [
+      {
+        "name": "authUrl",
+        "value": "localhost:5000"
+      }
+    ]
+  }
+]

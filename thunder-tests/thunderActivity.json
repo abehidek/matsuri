@@ -36,5 +36,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "40100449-e87e-4fed-b4c2-0c7c82e33c13",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:5000/me",
+    "url": "localhost:5000/me",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-17T13:26:21.660Z",
+    "modified": "2023-03-17T13:31:54.445Z",
+    "headers": [
+      {
+        "name": "Cookie",
+        "value": "sessionId=12321"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

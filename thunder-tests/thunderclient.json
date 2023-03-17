@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "_id": "2772dbdb-24d9-4f5e-a34b-f4ff5513dbc3",
+    "colId": "8a83c73d-fb97-438a-881f-aeb7088dfc37",
+    "containerId": "",
+    "name": "Sign In",
+    "url": "{{authUrl}}/signin",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-03-17T14:05:15.100Z",
+    "modified": "2023-03-17T14:17:45.630Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"abe@email.com\",\n  \"password\": \"12345678\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "dcae009b-5e86-42c4-b0cf-97e73d885fc1",
+    "colId": "8a83c73d-fb97-438a-881f-aeb7088dfc37",
+    "containerId": "",
+    "name": "Me",
+    "url": "{{authUrl}}/me",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2023-03-17T14:08:52.050Z",
+    "modified": "2023-03-17T14:09:01.441Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "07592cba-0e34-46c4-8cc9-e856a5f7c2e7",
+    "colId": "8a83c73d-fb97-438a-881f-aeb7088dfc37",
+    "containerId": "",
+    "name": "Sign Out",
+    "url": "{{authUrl}}/signout",
+    "method": "DELETE",
+    "sortNum": 30000,
+    "created": "2023-03-17T14:19:12.206Z",
+    "modified": "2023-03-17T14:19:24.454Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
