@@ -16,7 +16,7 @@ const ALLOWED_ORIGINS: string[] = [env.PUBLIC_SERVER_URL, env.PUBLIC_WEB_URL];
 app.use(
   cors({
     origin: ALLOWED_ORIGINS,
-    methods: "*",
+    methods: ["GET", "PUT", "POST", "DELETE", "PATCH", "HEAD"],
     credentials: true,
   })
 );

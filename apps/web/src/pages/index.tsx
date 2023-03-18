@@ -1,7 +1,8 @@
-import { env } from 'env'
-import { useQuery } from '@tanstack/react-query';
-import { api } from '../utils/trpc';
+import { useMutation } from '@tanstack/react-query';
 import { LogClient } from 'log-sdk';
+import { authClient } from "auth-sdk";
+import { OptionalLayout } from '../components/AuthLayout';
+import { Link } from 'react-router-dom';
 
 const logger = new LogClient({
   appName: "web",
@@ -9,21 +10,51 @@ const logger = new LogClient({
 
 const App: React.FC = () => {
   logger.log("render page!!", "index:render")
-  console.log("client environment variables:", env);
+  // console.log("client environment variables:", env);
 
-  const test = useQuery(["getAll"], () => api.getAll.query("Browser input"))
+  // const test = useQuery(["getAll"], () => api.getAll.query("Browser input"))
 
-  if (test.isLoading) return <div>Loading...</div>
+  // if (test.isLoading) return <div>Loading...</div>
 
-  if (test.isError) {
-    console.error(test.error)
-    return <div>Error...</div>
-  }
+  // if (test.isError) {
+  //   console.error(test.error)
+  //   return <div>Error...</div>
+  // }
+
+  const signOut = useMutation(["signOut"], () => {
+    return authClient.signOut({})
+  }, {
+    onSuccess: (data) => {
+      console.log("signOut Mut onSucess:", data)
+      if (!data.ok) return alert(data.message)
+
+      return alert(data.message)
+    },
+    onError: (err) => {
+      console.error("signOut Mut onError:", err)
+      alert("Something went wrong")
+    }
+  })
 
   return (
     <div>
-      <h1>Web App</h1>
-      {JSON.stringify(test.data, null, 2)}
+      <h1>Home</h1>
+      <OptionalLayout>
+        {(user) => (
+          <div>
+            {user
+              ? (
+                <div>
+                  {JSON.stringify(user)}
+                  <button onClick={() => signOut.mutate()}>Sign out</button>
+                </div>
+              )
+              : (<Link to="/signin">Sign in</Link>)
+            }
+          </div>
+        )}
+      </OptionalLayout>
+      {/* {JSON.stringify(test.data, null, 2)} */}
     </div>
   )
 }

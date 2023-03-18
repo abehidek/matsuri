@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfig/nodejs.json",
+  "include": [
+    "lib"
+  ],
+  "compilerOptions": {
+    "declarationMap": false,
+    "declaration": false,
+    "baseUrl": ".",
+  },
+}

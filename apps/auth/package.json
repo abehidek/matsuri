@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "env": "workspace:*",
     "utils": "workspace:*",
+    "auth-sdk": "workspace:*",
     "log-sdk": "workspace:*",
     "express": "^4.18.2",
     "prisma": "^4.11.0",

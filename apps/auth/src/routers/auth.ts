@@ -33,7 +33,6 @@ export const authenticate = async (
   if (!parseResult.success) {
     return res.status(400).json({
       message: "Failed to parse request cookies",
-      error: parseResult.error.format(),
     });
   }
 
@@ -106,13 +105,10 @@ const SESSION_COOKIE_OPTS: CookieOptions = {
   domain: env.DOMAIN_URL ? env.DOMAIN_URL : undefined,
 };
 
+import { signInInputSchema } from "auth-sdk";
+
 router.post("/signin", async (req, res) => {
-  const parseResult = z
-    .object({
-      email: z.string().min(1).email(),
-      password: z.string().min(6),
-    })
-    .safeParse(req.body);
+  const parseResult = signInInputSchema.safeParse(req.body);
 
   if (!parseResult.success) {
     return res.status(400).json({

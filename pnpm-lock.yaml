@@ -27,6 +27,7 @@ importers:
       '@types/node': ^18.15.0
       '@types/supertest': ^2.0.12
       '@vitest/coverage-c8': ^0.29.3
+      auth-sdk: workspace:*
       bcryptjs: ^2.4.3
       cookie-parser: ^1.4.6
       cors: ^2.8.5
@@ -43,6 +44,7 @@ importers:
       zod: ^3.21.4
     dependencies:
       '@prisma/client': 4.11.0_prisma@4.11.0
+      auth-sdk: link:../../packages/auth-sdk
       bcryptjs: 2.4.3
       cookie-parser: 1.4.6
       cors: 2.8.5
@@ -156,6 +158,7 @@ importers:
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
       '@vitejs/plugin-react': ^3.1.0
+      auth-sdk: workspace:*
       env: workspace:*
       eslint: ^8.36.0
       eslint-config-custom: workspace:*
@@ -177,6 +180,7 @@ importers:
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.14.1_@trpc+server@10.14.1
       '@trpc/server': 10.14.1
+      auth-sdk: link:../../packages/auth-sdk
       env: link:../../packages/env
       generouted: 1.11.6_vite@4.1.4
       log-sdk: link:../../packages/log-sdk
@@ -196,6 +200,19 @@ importers:
       typescript: 4.9.5
       vite: 4.1.4
       vite-plugin-environment: 1.1.3_vite@4.1.4
+
+  packages/auth-sdk:
+    specifiers:
+      env: workspace:*
+      tsconfig: workspace:*
+      utils: workspace:*
+      zod: ^3.21.4
+    dependencies:
+      env: link:../env
+      utils: link:../utils
+      zod: 3.21.4
+    devDependencies:
+      tsconfig: link:../tsconfig
 
   packages/env:
     specifiers:
