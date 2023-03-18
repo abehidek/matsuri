@@ -107,13 +107,6 @@ const SESSION_COOKIE_OPTS: CookieOptions = {
 };
 
 router.post("/signin", async (req, res) => {
-  console.log(req.cookies);
-  if ("sessionId" in req.cookies) {
-    return res.status(400).json({
-      message: "Already authenticated",
-    });
-  }
-
   const parseResult = z
     .object({
       email: z.string().min(1).email(),
