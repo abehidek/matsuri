@@ -19,7 +19,8 @@
     "db:push:reset": "dotenv -- turbo run db:push:reset",
     "db:pull": "dotenv -- turbo run db:pull",
     "db:generate": "dotenv -- turbo run db:generate",
-    "db:seed": "dotenv -- turbo run db:seed"
+    "db:seed": "dotenv -- turbo run db:seed",
+    "setup:dev": "pnpm i && pnpm db:push:reset && pnpm db:generate && pnpm db:seed"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
