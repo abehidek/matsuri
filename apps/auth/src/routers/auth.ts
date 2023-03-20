@@ -31,8 +31,8 @@ export const authenticate = async (
     .safeParse(req.cookies);
 
   if (!parseResult.success) {
-    return res.status(400).json({
-      message: "Failed to parse request cookies",
+    return res.status(404).json({
+      message: "Session not found",
     });
   }
 
