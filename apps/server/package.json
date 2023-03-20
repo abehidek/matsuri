@@ -27,6 +27,7 @@
     "superjson": "^1.12.2",
     "tsx": "^3.12.3",
     "utils": "workspace:*",
+    "auth-sdk": "workspace:*",
     "zod": "^3.21.4"
   },
   "devDependencies": {

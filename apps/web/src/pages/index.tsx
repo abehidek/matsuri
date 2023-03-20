@@ -1,9 +1,10 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { LogClient } from 'log-sdk';
 import { authClient } from "auth-sdk";
 import { OptionalLayout } from '../components/AuthLayout';
 import { Link } from 'react-router-dom';
 import { Button } from 'ui'
+import { api } from '../utils/trpc';
 
 const logger = new LogClient({
   appName: "web",
@@ -21,6 +22,14 @@ const App: React.FC = () => {
   //   console.error(test.error)
   //   return <div>Error...</div>
   // }
+
+  const me = useQuery(["me"], () => api.me.query())
+
+  if (me.isLoading) return <div>Loading...</div>
+  if (me.isError) {
+    console.error(me.error)
+    return <div>Error...</div>
+  }
 
   const signOut = useMutation(["signOut"], () => {
     return authClient.signOut({})
@@ -40,6 +49,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h1 className='font-bold text-2xl'>Home</h1>
+      {JSON.stringify(me)}
       <Button />
       <OptionalLayout>
         {(user) => (
