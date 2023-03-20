@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from 'cookie-parser';
 import cors from "cors";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { createContext } from "./trpc";
@@ -19,6 +20,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   "/trpc",

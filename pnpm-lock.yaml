@@ -109,12 +109,14 @@ importers:
     specifiers:
       '@prisma/client': ^4.11.0
       '@trpc/server': ^10.14.1
+      '@types/cookie-parser': ^1.4.3
       '@types/cors': ^2.8.13
       '@types/express': ^4.17.17
       '@types/node': ^18.15.0
       '@types/supertest': ^2.0.12
       '@vitest/coverage-c8': ^0.29.3
       auth-sdk: workspace:*
+      cookie-parser: ^1.4.6
       cors: ^2.8.5
       env: workspace:*
       eslint-config-custom: workspace:*
@@ -131,6 +133,7 @@ importers:
       '@prisma/client': 4.11.0_prisma@4.11.0
       '@trpc/server': 10.14.1
       auth-sdk: link:../../packages/auth-sdk
+      cookie-parser: 1.4.6
       cors: 2.8.5
       env: link:../../packages/env
       express: 4.18.2
@@ -140,6 +143,7 @@ importers:
       utils: link:../../packages/utils
       zod: 3.21.4
     devDependencies:
+      '@types/cookie-parser': 1.4.3
       '@types/cors': 2.8.13
       '@types/express': 4.17.17
       '@types/node': 18.15.0

@@ -7,18 +7,12 @@ import { $try } from "utils";
 import { authClient } from "auth-sdk";
 import { z } from "zod";
 
-export const createContext = async ({
-  req: req,
-  res: _res,
-}: trpcExpress.CreateExpressContextOptions) => {
-  console.log(req.cookies);
+export const createContext = async ({ req, res: _res }: trpcExpress.CreateExpressContextOptions) => {
   const parseResult = z
     .object({
       sessionId: z.string().min(1),
     })
     .safeParse(req.cookies);
-
-  console.log(parseResult);
 
   if (!parseResult.success) {
     return {
@@ -28,32 +22,32 @@ export const createContext = async ({
     };
   }
 
-  const [res, error] = await $try(
+  const [authResponse, authError] = await $try(
     authClient.me({
       sessionId: parseResult.data.sessionId,
     })
   );
 
-  if (error) {
+  if (authError) {
     return {
       prisma,
       ok: false,
-      error,
+      error: authError,
     };
   }
 
-  if (!res.ok) {
+  if (!authResponse.ok) {
     return {
       prisma,
       ok: false,
-      error: res.message,
+      error: authResponse.message,
     };
   }
 
   return {
     prisma,
     ok: true,
-    user: res.user,
+    user: authResponse.user,
     sessionId: parseResult.data.sessionId,
   };
 };

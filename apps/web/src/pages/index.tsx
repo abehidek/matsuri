@@ -23,14 +23,6 @@ const App: React.FC = () => {
   //   return <div>Error...</div>
   // }
 
-  const me = useQuery(["me"], () => api.me.query())
-
-  if (me.isLoading) return <div>Loading...</div>
-  if (me.isError) {
-    console.error(me.error)
-    return <div>Error...</div>
-  }
-
   const signOut = useMutation(["signOut"], () => {
     return authClient.signOut({})
   }, {
@@ -45,6 +37,14 @@ const App: React.FC = () => {
       alert("Something went wrong")
     }
   })
+
+  const me = useQuery(["me2"], () => api.me.query())
+
+  if (me.isLoading) return <div>Loading...</div>
+  if (me.isError) {
+    console.error(me.error)
+    return <div>Error...</div>
+  }
 
   return (
     <div>
