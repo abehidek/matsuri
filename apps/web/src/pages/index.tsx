@@ -3,6 +3,7 @@ import { LogClient } from 'log-sdk';
 import { authClient } from "auth-sdk";
 import { OptionalLayout } from '../components/AuthLayout';
 import { Link } from 'react-router-dom';
+import { Button } from 'ui'
 
 const logger = new LogClient({
   appName: "web",
@@ -38,7 +39,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1 className='font-bold text-2xl'>Home</h1>
+      <Button />
       <OptionalLayout>
         {(user) => (
           <div>
