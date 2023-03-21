@@ -4,25 +4,13 @@ import { authClient } from "auth-sdk";
 import { OptionalLayout } from '../components/AuthLayout';
 import { Link } from 'react-router-dom';
 import { Button } from 'ui'
-import { api } from '../utils/trpc';
+import { BaseLayout } from '../components/BaseLayout';
 
 const logger = new LogClient({
   appName: "web",
 });
 
 const App: React.FC = () => {
-  logger.log("render page!!", "index:render")
-  // console.log("client environment variables:", env);
-
-  // const test = useQuery(["getAll"], () => api.getAll.query("Browser input"))
-
-  // if (test.isLoading) return <div>Loading...</div>
-
-  // if (test.isError) {
-  //   console.error(test.error)
-  //   return <div>Error...</div>
-  // }
-
   const signOut = useMutation(["signOut"], () => {
     return authClient.signOut({})
   }, {
@@ -38,36 +26,28 @@ const App: React.FC = () => {
     }
   })
 
-  const me = useQuery(["me2"], () => api.me.query())
-
-  if (me.isLoading) return <div>Loading...</div>
-  if (me.isError) {
-    console.error(me.error)
-    return <div>Error...</div>
-  }
-
   return (
-    <div>
-      <h1 className='font-bold text-2xl'>Home</h1>
-      {JSON.stringify(me)}
-      <Button />
-      <OptionalLayout>
-        {(user) => (
-          <div>
-            {user
-              ? (
-                <div>
-                  {JSON.stringify(user)}
-                  <button onClick={() => signOut.mutate()}>Sign out</button>
-                </div>
-              )
-              : (<Link to="/signin">Sign in</Link>)
-            }
-          </div>
-        )}
-      </OptionalLayout>
-      {/* {JSON.stringify(test.data, null, 2)} */}
-    </div>
+    <BaseLayout title='Home' href='/'>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, facere quo pariatur, quae soluta iure praesentium dolorem accusamus inventore perspiciatis laboriosam, modi id veniam. Doloremque, aliquam officia? Laboriosam, ipsum quisquam.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Et pariatur similique aperiam illum doloremque delectus non, maxime distinctio velit iusto nam quibusdam. Officiis possimus dicta obcaecati eveniet beatae quasi accusamus.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid pariatur voluptatibus excepturi enim debitis et possimus. Minus voluptatibus voluptatum accusantium iure debitis quo suscipit unde a officiis, dicta totam sint?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, earum molestias autem accusamus nihil expedita iste repudiandae labore sunt mollitia enim ducimus blanditiis accusantium libero iure suscipit placeat eveniet tempore!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, facere quo pariatur, quae soluta iure praesentium dolorem accusamus inventore perspiciatis laboriosam, modi id veniam. Doloremque, aliquam officia? Laboriosam, ipsum quisquam.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Et pariatur similique aperiam illum doloremque delectus non, maxime distinctio velit iusto nam quibusdam. Officiis possimus dicta obcaecati eveniet beatae quasi accusamus.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid pariatur voluptatibus excepturi enim debitis et possimus. Minus voluptatibus voluptatum accusantium iure debitis quo suscipit unde a officiis, dicta totam sint?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, earum molestias autem accusamus nihil expedita iste repudiandae labore sunt mollitia enim ducimus blanditiis accusantium libero iure suscipit placeat eveniet tempore!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, facere quo pariatur, quae soluta iure praesentium dolorem accusamus inventore perspiciatis laboriosam, modi id veniam. Doloremque, aliquam officia? Laboriosam, ipsum quisquam.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Et pariatur similique aperiam illum doloremque delectus non, maxime distinctio velit iusto nam quibusdam. Officiis possimus dicta obcaecati eveniet beatae quasi accusamus.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid pariatur voluptatibus excepturi enim debitis et possimus. Minus voluptatibus voluptatum accusantium iure debitis quo suscipit unde a officiis, dicta totam sint?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, earum molestias autem accusamus nihil expedita iste repudiandae labore sunt mollitia enim ducimus blanditiis accusantium libero iure suscipit placeat eveniet tempore!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quos. Fugiat, dolor accusamus tempore deserunt minus eveniet amet quas voluptate enim sapiente quidem voluptas, quaerat at soluta perspiciatis labore consequuntur?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias architecto nostrum autem excepturi maxime. Recusandae animi eius aspernatur itaque quas alias molestiae, in et facere. Cum esse autem minus praesentium.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, corrupti error. Ratione a magni temporibus similique? Ad excepturi deleniti ipsum. Reiciendis possimus et laboriosam nemo minima quisquam ab facere obcaecati!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sit, dolore minima qui, tempora, provident quibusdam quasi corporis ratione explicabo inventore atque consectetur earum odio vero. Aspernatur qui odio saepe.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis quos modi cum ipsum unde tenetur soluta, explicabo at magnam suscipit quaerat nobis perferendis iste, ab ipsam officia quae, nisi deserunt.
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil expedita dolore, temporibus voluptatem quia dicta repellendus minus iusto autem atque corrupti quisquam nemo quas beatae eveniet dolorum dolor ullam fugit.
+
+    </BaseLayout>
   )
 }
 

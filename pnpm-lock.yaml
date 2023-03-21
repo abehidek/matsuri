@@ -166,6 +166,7 @@ importers:
       '@vitejs/plugin-react': ^3.1.0
       auth-sdk: workspace:*
       autoprefixer: ^10.4.14
+      clsx: ^1.2.1
       env: workspace:*
       eslint: ^8.36.0
       eslint-config-custom: workspace:*
@@ -208,6 +209,7 @@ importers:
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
       autoprefixer: 10.4.14_postcss@8.4.21
+      clsx: 1.2.1
       eslint: 8.36.0
       eslint-config-custom: link:../../packages/eslint-config-custom
       postcss: 8.4.21
@@ -1866,6 +1868,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: true
 
   /color-convert/1.9.3:

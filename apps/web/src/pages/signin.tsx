@@ -4,6 +4,7 @@ import { authClient, SignInInputSchema, signInInputSchema } from 'auth-sdk';
 import { useMutation } from "@tanstack/react-query";
 import { OptionalLayout } from "../components/AuthLayout";
 import { Navigate } from "react-router-dom";
+import { BaseLayout } from "../components/BaseLayout";
 
 const SignInPage: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<SignInInputSchema>({
@@ -29,8 +30,7 @@ const SignInPage: React.FC = () => {
   });
 
   return (
-    <div>
-      <h1>Sign in</h1>
+    <BaseLayout href="/signin" title="Sign In">
       <OptionalLayout>
         {(user) => {
           if (user) return <Navigate to="/" replace />
@@ -57,7 +57,7 @@ const SignInPage: React.FC = () => {
           )
         }}
       </OptionalLayout>
-    </div>
+    </BaseLayout>
   )
 }
 
