@@ -8,11 +8,9 @@ import { env } from "../../packages/env/index";
 // https://vitejs.dev/config/
 export default defineConfig({
   //@ts-ignore: ignore env type errors (because there are some number environment variables)
-  plugins: [
-    react(),
-    envp(env, {
-      loadEnvFiles: false,
-    }),
+  plugins: [react(), envp(env, {
+    loadEnvFiles: false,
+  }),
   ],
   server: {
     host: true,

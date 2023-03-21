@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { authClient } from "auth-sdk";
 import { Link } from "react-router-dom";
 import clsx from 'clsx';
@@ -17,9 +17,9 @@ type SidebarItem = {
   onClick: () => void;
 };
 
-
-
 export const Sidebar: React.FC<{ href: string }> = (props) => {
+  const user = useQuery(["me"], () => authClient.me({}))
+
   const signOut = useMutation(["signOut"], () => {
     return authClient.signOut({})
   }, {
@@ -35,19 +35,20 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
     }
   })
 
+  const signInOrSignOut = user.data?.ok ? {
+    title: "Sign Out",
+    onClick: signOut.mutate
+  } : {
+    title: "Sign In",
+    href: "/signin",
+  } as const
+
   const sidebarItems: SidebarItem[] = [
     {
       title: "Home",
       href: "/",
     },
-    {
-      title: "Sign In",
-      href: "/signin",
-    },
-    {
-      title: "Sign Out",
-      onClick: signOut.mutate
-    }
+    signInOrSignOut
   ]
 
   return (
@@ -85,7 +86,7 @@ export const BaseLayout: React.FC<Props> = (props) => {
         <div className="order-1 flex-[0_0_0px]">
           <Sidebar href={props.href} />
         </div>
-        <main className="order-2 w-full">
+        <main className="order-2 w-full mt-10">
           {props.children}
         </main>
         <div className="order-3 flex-[0_0_0px]">

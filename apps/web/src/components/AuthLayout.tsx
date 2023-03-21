@@ -24,6 +24,8 @@ type OptionalAuthLayoutProps = {
   children: (user?: User) => React.ReactNode;
 };
 
+export { type User };
+
 export const OptionalLayout: React.FC<OptionalAuthLayoutProps> = (props) => {
   const user = useQuery(["me"], () => authClient.me({}))
 
