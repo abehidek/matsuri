@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "include": [
+    "lib"
+  ],
+  "compilerOptions": {
+    "declarationMap": false,
+    "declaration": false,
+    "baseUrl": ".",
+  },
+}

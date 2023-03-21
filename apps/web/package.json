@@ -10,14 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@generouted/react-router": "^1.11.6",
     "@hookform/resolvers": "^2.9.11",
     "@tanstack/react-query": "^4.26.1",
     "@trpc/client": "^10.14.1",
     "@trpc/server": "^10.14.1",
     "auth-sdk": "workspace:*",
     "env": "workspace:*",
-    "generouted": "^1.11.6",
     "log-sdk": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +23,7 @@
     "react-router-dom": "^6.9.0",
     "superjson": "^1.12.2",
     "ui": "workspace:*",
+    "fsr": "workspace:*",
     "zod": "^3.21.4"
   },
   "devDependencies": {
