@@ -48,6 +48,10 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
       title: "Home",
       href: "/",
     },
+    {
+      title: "New note",
+      href: "/notes/new"
+    },
     signInOrSignOut
   ]
 
