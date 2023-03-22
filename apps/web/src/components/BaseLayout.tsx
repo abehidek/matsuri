@@ -12,9 +12,11 @@ type Props = {
 type SidebarItem = {
   title: string;
   href: string;
+  auth: boolean;
 } | {
   title: string;
   onClick: () => void;
+  auth: boolean;
 };
 
 export const Sidebar: React.FC<{ href: string }> = (props) => {
@@ -37,20 +39,24 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
 
   const signInOrSignOut = user.data?.ok ? {
     title: "Sign Out",
-    onClick: signOut.mutate
+    onClick: signOut.mutate,
+    auth: true
   } : {
     title: "Sign In",
     href: "/signin",
+    auth: false
   } as const
 
   const sidebarItems: SidebarItem[] = [
     {
       title: "Home",
       href: "/",
+      auth: false
     },
     {
       title: "New note",
-      href: "/notes/new"
+      href: "/notes/new",
+      auth: true
     },
     signInOrSignOut
   ]
@@ -58,12 +64,13 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
   return (
     <div className="sticky top-[6rem]">
       <div className="flex flex-col gap-3">
-        {sidebarItems.map(item =>
-          <div key={item.title}>
+        {sidebarItems.map(item => {
+          if (item.auth && !user.data?.ok) return null
+          return <div key={item.title}>
             {"href" in item
               ? <Link
                 className={clsx("rounded-md cursor-pointer w-full hover:bg-slate-300 py-1 px-4 flex", {
-                  "bg-slate-100 font-bold": item.href === props.href
+                  "bg-slate-100": item.href === props.href
                 })}
                 to={item.href}
               >
@@ -77,6 +84,7 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
               </div>
             }
           </div>
+        }
         )}
       </div>
     </div>
@@ -87,7 +95,7 @@ export const BaseLayout: React.FC<Props> = (props) => {
   return (
     <div className="h-screen">
       <div className="mx-auto max-w-3xl flex gap-8 min-h-full items items-stretch mt-8">
-        <div className="order-1 flex-[0_0_0px]">
+        <div className="order-1 flex-[0_0_0px] border-r border-gray-200 px-6">
           <Sidebar href={props.href} />
         </div>
         <main className="order-2 w-full mt-10">
