@@ -64,10 +64,12 @@ Simple overview of use/purpose.
 - [ ] chore: add TRPCError like error handler for express
 - [ ] feat: crud notes (development UI-first w/ tRPC)
   - [ ] feat: find/develop a good markdown editor
+    - [ ] Traditional approach: Mantine Tiptap text editor
+    - [ ] Notion-like: Yopta-Editor, editor.js and BlockNote
 - [ ] feat: share notes w/ other users
 - [ ] chore: tRPC protectedProcedure
 - [ ] feat: sign in/sign out ui
-- [x] chore: logger service (for metrics)
+- [x] chore: logger service (for metrics
 - [ ] chore: storage service
 - [x] chore: tailwind monorepo config
 - [ ] feat: do ui library on-demand using shadcn/ui components (React + Tailwindcss + Radix UI)
