@@ -3,8 +3,17 @@ import { prisma } from '../../prisma/client';
 import { appRouter } from './root';
 
 const caller = appRouter.createCaller({
-  prisma
+  prisma,
+  ok: false,
+  error: "No session found",
 });
+
+// const authenticatedCaller = appRouter.createCaller({
+//   prisma,
+//   ok: true,
+//   user: "something",
+//   sessionId: "somethingid"
+// });
 
 describe("getAll", () => {
   test("Should not work by sending an input number", async () => {

@@ -33,6 +33,7 @@
     "auth-sdk": "workspace:*",
     "env": "workspace:*",
     "fsr": "workspace:*",
+    "utils": "workspace:*",
     "log-sdk": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

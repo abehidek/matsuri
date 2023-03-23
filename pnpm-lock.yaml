@@ -199,6 +199,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.9.3
       ui: workspace:*
+      utils: workspace:*
       vite: ^4.1.0
       vite-plugin-environment: ^1.1.3
       zod: ^3.21.4
@@ -233,6 +234,7 @@ importers:
       react-router-dom: 6.9.0_biqbaboplfbrettd7655fr4n2y
       superjson: 1.12.2
       ui: link:../../packages/ui
+      utils: link:../../packages/utils
       zod: 3.21.4
     devDependencies:
       '@types/react': 18.0.28

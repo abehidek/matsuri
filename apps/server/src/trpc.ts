@@ -5,7 +5,7 @@ import superjson from "superjson";
 import { prisma } from "../prisma/client";
 import { $try } from "utils";
 import { authClient } from "auth-sdk";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 
 export const createContext = async ({ req, res: _res }: trpcExpress.CreateExpressContextOptions) => {
   const parseResult = z
@@ -55,8 +55,16 @@ type Context = inferAsyncReturnType<typeof createContext>;
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
-  errorFormatter({ shape }) {
-    return shape;
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError: error.code === "BAD_REQUEST" && error.cause instanceof ZodError
+          ? error.cause.flatten()
+          : null,
+      }
+    };
   },
 });
 

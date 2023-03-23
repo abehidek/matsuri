@@ -1,6 +1,3 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { LogClient } from 'log-sdk';
-import { authClient } from "auth-sdk";
 import { OptionalLayout, User } from '../components/AuthLayout';
 import { BaseLayout } from '../components/BaseLayout';
 import { Link } from 'fsr';

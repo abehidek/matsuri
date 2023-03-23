@@ -18,7 +18,7 @@ const create = protectedProcedure.input(z.object({
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
       cause: err,
-      message: "Failed to create note"
+      message: "Something went wrong when creating your note."
     })
   }
 

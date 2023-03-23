@@ -1,4 +1,3 @@
-import { env } from "env";
 import { BaseLayout } from "../../components/BaseLayout";
 import { OptionalLayout } from "../../components/AuthLayout";
 import { Navigate } from "react-router-dom";
@@ -12,9 +11,11 @@ import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
 import Placeholder from "@tiptap/extension-placeholder";
 import { useState } from "react";
-import iconAdd from "../../assets/icon-add.svg";
 import { api } from "../../utils/trpc";
 import { useMutation } from "@tanstack/react-query";
+import { TRPCClientErrorLike } from "@trpc/client";
+import { AppRouter } from "../../../../server/src/router/root";
+import { formatZodError } from 'utils'
 
 const NewNote: React.FC = () => {
   const [content, setContent] = useState("");
@@ -37,7 +38,10 @@ const NewNote: React.FC = () => {
 
   const createNote = useMutation(["note.create"], api.note.create.mutate, {
     onSuccess: (res) => alert(res.message),
-    onError: (err) => alert(JSON.stringify(err)),
+    onError: (err: TRPCClientErrorLike<AppRouter>) => {
+      if (err.data?.zodError) return alert(formatZodError(err.data.zodError))
+      alert(err.message)
+    },
   });
 
   const submitNote = () => {
@@ -101,9 +105,6 @@ const NewNote: React.FC = () => {
 
                 <RichTextEditor.Content />
               </RichTextEditor>
-              {/* <button className="rounded-full bg-blue-500 p-4 fixed bottom-7 right-7 z-10">
-                <img className="w-16 h-16" src={iconAdd} alt="" />
-              </button> */}
             </div>
           );
         }}

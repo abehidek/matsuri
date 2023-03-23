@@ -1,3 +1,5 @@
+import { ZodError, typeToFlattenedError } from "zod";
+
 export const hello = () => console.log("World")
 
 export const $try = async <T>(
@@ -12,3 +14,12 @@ export const $try = async <T>(
     throw throwable;
   }
 };
+
+export const formatZodError = (flattened: typeToFlattenedError<any, string>): string => {
+  const flattenedFormErrors =  flattened.formErrors.join("\n");
+  const flattenedFieldErrors =  Object.keys(flattened.fieldErrors).map(k => {
+    return `${k.charAt(0).toUpperCase() + k.slice(1)}: ${flattened.fieldErrors[k]}.`
+  }).join("\n");
+
+  return flattenedFieldErrors + "\n" + flattenedFormErrors;
+}
