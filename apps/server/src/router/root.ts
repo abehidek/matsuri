@@ -3,8 +3,10 @@ import { protectedProcedure, publicProcedure, router } from "../trpc";
 import { env } from "env";
 import { $try } from "utils";
 import { TRPCError } from "@trpc/server";
+import { noteRouter } from "./note";
 
 export const appRouter = router({
+  note: noteRouter,
   me: protectedProcedure.query(async ({ ctx, input }) => {
     return {
       user: ctx.user,

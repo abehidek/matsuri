@@ -5,7 +5,6 @@ import { prisma } from "./client"
 
   await prisma.note.create({
     data: {
-      title: "First Note",
       content: "# Hello this is my first note",
       userId: "123",
     }
@@ -13,7 +12,6 @@ import { prisma } from "./client"
 
   await prisma.note.create({
     data: {
-      title: "Polimorphisms in PL",
       content: "## No idea how it works!",
       userId: "123",
     }
@@ -21,7 +19,6 @@ import { prisma } from "./client"
 
   await prisma.note.create({
     data: {
-      title: "French Revolution",
       content: "This guy Robespierre is crazy!",
       userId: "321",
     }
