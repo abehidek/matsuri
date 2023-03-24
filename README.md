@@ -60,21 +60,27 @@ Simple overview of use/purpose.
     - [x] abstraction for testing together in other services
   - [ ] web
 - [ ] chore: setup CI
-- [-] feat: finish session-based authentication microservice (see keycloak standards?)
-- [ ] chore: add TRPCError like error handler for express
+- [x] feat: finish session-based authentication microservice (see keycloak standards?)
+- [x] chore: shared seed users (for faster development)
+- [ ] chore: add TRPCError-like error handler for express
 - [ ] feat: crud notes (development UI-first w/ tRPC)
-  - [ ] feat: find/develop a good markdown editor
-    - [ ] Traditional approach: Mantine Tiptap text editor
-    - [ ] Notion-like: Yopta-Editor, editor.js and BlockNote
+  - [x] read all notes
+  - [x] add note
+  - [ ] edit note
+  - [ ] delete note
+  - [x] feat: find/develop a good markdown editor
+    - [x] Traditional approach: Mantine Tiptap text editor
+    - [x] Notion-like: Yopta-Editor, editor.js and BlockNote
 - [ ] feat: share notes w/ other users
-- [ ] chore: tRPC protectedProcedure
-- [ ] feat: sign in/sign out ui
+- [x] chore: tRPC protectedProcedure
+- [x] feat: sign in/sign out ui
 - [x] chore: logger service (for metrics
 - [ ] chore: storage service
 - [x] chore: tailwind monorepo config
 - [ ] feat: do ui library on-demand using shadcn/ui components (React + Tailwindcss + Radix UI)
 - [-] chore: sdk for all services
   - [x] Log
+  - [x] Auth
 - [x] bug: fix pnpm test env loader in turborepo cli
 
 ## Getting Started
