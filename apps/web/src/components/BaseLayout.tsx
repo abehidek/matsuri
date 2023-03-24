@@ -17,7 +17,7 @@ type SidebarItem = {
   title: string;
   onClick: () => void;
   auth: boolean;
-};
+} | undefined;
 
 export const Sidebar: React.FC<{ href: string }> = (props) => {
   const user = useQuery(["me"], () => authClient.me({}))
@@ -47,6 +47,12 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
     auth: false
   } as const
 
+  const signUp = user.data?.ok ? undefined : {
+    title: "Sign Up",
+    href: "/signup",
+    auth: false
+  }
+
   const sidebarItems: SidebarItem[] = [
     {
       title: "Home",
@@ -58,13 +64,15 @@ export const Sidebar: React.FC<{ href: string }> = (props) => {
       href: "/notes/new",
       auth: true
     },
-    signInOrSignOut
+    signInOrSignOut,
+    signUp
   ]
 
   return (
     <div className="sticky top-[6rem]">
       <div className="flex flex-col gap-3">
         {sidebarItems.map(item => {
+          if (!item) return null
           if (item.auth && !user.data?.ok) return null
           return <div key={item.title}>
             {"href" in item

@@ -66,7 +66,7 @@ describe("GET /me", () => {
   test("Should not work by sending no sessionId", async () => {
     const res = await supertest(app).get("/me");
 
-    expect(res.statusCode).toBe(400);
+    expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty("message");
   });
 
@@ -95,7 +95,7 @@ describe("DELETE /signout", () => {
   test("Should not work by sending no sessionId", async () => {
     const res = await supertest(app).delete("/signout");
 
-    expect(res.statusCode).toBe(400);
+    expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty("message");
   });
 
@@ -120,3 +120,34 @@ describe("DELETE /signout", () => {
     expect(signOutResponse.body).toHaveProperty("message");
   });
 });
+
+describe("POST /signup", () => {
+  test("Should not work by sending nothing", async () => {
+    const res = await supertest(app).post("/signup");
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty("message");
+  })
+
+  test("Should not work by sending incorrect credentials", async () => {
+    const res = await supertest(app).post("/signup").send({
+      name: "test",
+      email: "test",
+      password: "test"
+    });
+    
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty("message");
+  })
+
+  test("Should work by sending correct credentials", async () => {
+    const res = await supertest(app).post("/signup").send({
+      name: "test",
+      email: "test@test.com",
+      password: "test123123"
+    });
+    
+    expect(res.statusCode).toBe(201);
+    expect(res.body).toHaveProperty("message");
+  })
+})

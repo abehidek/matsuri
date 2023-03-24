@@ -4,6 +4,7 @@ import { type AxiosHeaders } from "axios";
 import { signIn } from "./signin";
 import { signInInputSchema, type SignInInputSchema } from "./signin";
 import { signOut } from "./signout";
+import { signUpInputSchema, SignUpInputSchema, signUp } from "./signup";
 
 type AuthClientConfig = {
   authUrl: string;
@@ -34,6 +35,14 @@ export class AuthClient {
     });
   }
 
+  async signUp(credentials: SignUpInputSchema, headers?: AxiosHeaders) {
+    return await signUp({
+      authUrl: this.authUrl,
+      headers: headers,
+      credentials: credentials,
+    });
+  }
+
   async signOut(params: { headers?: AxiosHeaders; sessionId?: string }) {
     return await signOut({
       authUrl: this.authUrl,
@@ -47,4 +56,4 @@ export const authClient = new AuthClient({
   authUrl: env.PUBLIC_AUTH_URL,
 });
 
-export { signIn, signOut, me };
+export { signIn, signOut, me, signUpInputSchema, type SignUpInputSchema, signUp };

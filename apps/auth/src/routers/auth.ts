@@ -8,7 +8,7 @@ import { logger } from "src";
 import { $try } from "utils";
 import { z } from "zod";
 import { User, prisma } from "../../prisma/client";
-import { comparePassword } from "src/lib/password";
+import { comparePassword, hashPassword } from "src/lib/password";
 import { env } from "env";
 
 const router = express.Router();
@@ -112,7 +112,7 @@ router.post("/signin", async (req, res) => {
 
   if (!parseResult.success) {
     return res.status(400).json({
-      message: "Failed to parse request cookies",
+      message: "Failed to parse request credentials",
       error: parseResult.error.format(),
     });
   }
@@ -198,5 +198,48 @@ router.delete("/signout", authenticate, async (req: AuthRequest, res) => {
     .status(200)
     .json({ message: "Sign out succesfully" });
 });
+
+import { signUpInputSchema } from "auth-sdk";
+
+router.post("/signup", async (req, res) => {
+  const parseResult = signUpInputSchema.safeParse(req.body);
+
+  if (!parseResult.success) {
+    return res.status(400).json({
+      message: "Failed to parse request credentials",
+      error: parseResult.error.flatten(),
+    });
+  }
+
+  const { email, name, password } = parseResult.data
+
+  const [passwordHash, hashError] = await $try(hashPassword(password))
+
+  if (hashError) {
+    console.error(hashError)
+    return res.status(500).json({
+      message: "Failed to sign up User",
+    });
+  }
+
+  const [_, dbError] = await $try(prisma.user.create({
+    data: {
+      email,
+      name,
+      passwordHash
+    }
+  }));
+
+  if (dbError) {
+    console.error(dbError)
+    return res.status(500).json({
+      message: "Failed to sign up User",
+    });
+  }
+
+  return res
+    .status(201)
+    .json({ message: "User created succesfully" })
+})
 
 export default router;
