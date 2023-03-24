@@ -3,6 +3,31 @@ import { protectedProcedure, router } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
+const all = protectedProcedure.query(async ({ ctx }) => {
+  const [notes, err] = await $try(ctx.prisma.note.findMany({
+    where: {
+      userId: ctx.user.id
+    },
+    select: {
+      id: true,
+      content: true,
+      updatedAt: true
+    }
+  }));
+
+  if (err) {
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      cause: err,
+      message: "Something went wrong when getting your notes."
+    })
+  }
+
+  return {
+    message: "Succesfully retrieve your notes.",
+    notes
+  }
+})
 
 const create = protectedProcedure.input(z.object({
   content: z.string().min(1),
@@ -23,10 +48,11 @@ const create = protectedProcedure.input(z.object({
   }
 
   return {
-    message: "Succesfully created note"
+    message: "Succesfully created note."
   }
 });
 
 export const noteRouter = router({
+  all,
   create
 })

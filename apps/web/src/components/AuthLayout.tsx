@@ -1,21 +1,32 @@
 import { authClient } from "auth-sdk";
 import { User } from "../../../auth/prisma/client";
 import { useQuery } from "@tanstack/react-query";
+import { Loading } from "./Loading";
+import { Error } from "./Error";
+import { Navigate } from "react-router-dom";
+import { TRPCError } from "@trpc/server";
 
 type AuthLayoutProps = {
   children: (user: User) => React.ReactNode;
 };
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ ...props }) => {
-  const user = useQuery(["me"], () => authClient.me({}))
+  const { data, isLoading, isError, error } = useQuery(["me"], () => authClient.me({}))
 
-  if (user.isLoading) return <div>Loading...</div>
-  if (user.isError) return <div>{JSON.stringify(user.error)}</div>
-  if (!user.data.ok) return <div>{user.data.message}</div>
+  if (isLoading) return <Loading />
+  if (isError) {
+    console.error(error);
+    return <Error message={`Failed to fetch session on server`} />
+  }
+
+  if (!data.ok) {
+    // alert user that is not signed in
+    return <Navigate to="/" replace />
+  }
 
   return (
     <>
-      {props.children(user.data.user)}
+      {props.children(data.user)}
     </>
   )
 };
@@ -27,15 +38,19 @@ type OptionalAuthLayoutProps = {
 export { type User };
 
 export const OptionalLayout: React.FC<OptionalAuthLayoutProps> = (props) => {
-  const user = useQuery(["me"], () => authClient.me({}))
+  const { isLoading, isError, data, error } = useQuery(["me"], () => authClient.me({}))
 
-  if (user.isLoading) return <div>Loading...</div>
-  if (user.isError) return <div>{props.children(undefined)}</div>
-  if (!user.data.ok) return <div>{props.children(undefined)}</div>
+  if (isLoading) return <Loading />
+  if (isError) {
+    console.error(error);
+    return <div>{props.children(undefined)}</div>
+  }
+
+  if (!data.ok) return <div>{props.children(undefined)}</div>
 
   return (
     <>
-      {props.children(user.data.user)}
+      {props.children(data.user)}
     </>
   )
 }

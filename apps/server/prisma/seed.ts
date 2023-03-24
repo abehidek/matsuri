@@ -5,21 +5,21 @@ import { prisma } from "./client"
 
   await prisma.note.create({
     data: {
-      content: "# Hello this is my first note",
+      content: "<p>Hello this is my first note</p>",
       userId: "123",
     }
   });
 
   await prisma.note.create({
     data: {
-      content: "## No idea how it works!",
+      content: "<h1>No idea how it works!</h1>",
       userId: "123",
     }
   });
 
   await prisma.note.create({
     data: {
-      content: "This guy Robespierre is crazy!",
+      content: "<p>This guy Robespierre is crazy!</p>",
       userId: "321",
     }
   });

@@ -10,6 +10,8 @@ import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
 import Placeholder from "@tiptap/extension-placeholder";
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list';
 import { useState } from "react";
 import { api } from "../../utils/trpc";
 import { useMutation } from "@tanstack/react-query";
@@ -18,10 +20,21 @@ import { AppRouter } from "../../../../server/src/router/root";
 import { formatZodError } from 'utils'
 
 const NewNote: React.FC = () => {
-  const [content, setContent] = useState("");
+  const [HTML, setHTML] = useState("");
+  const [text, setText] = useState("");
   const editor = useEditor({
     extensions: [
       StarterKit,
+      BulletList.configure({
+        HTMLAttributes: {
+          class: 'list-disc'
+        }
+      }),
+      OrderedList.configure({
+        HTMLAttributes: {
+          class: 'list-decimal'
+        }
+      }),
       Underline,
       Link,
       Superscript,
@@ -30,25 +43,30 @@ const NewNote: React.FC = () => {
       Placeholder.configure({ placeholder: "Draft here..." }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
-    content,
+    content: HTML,
     onUpdate: (props) => {
-      setContent(props.editor.getHTML());
+      setHTML(props.editor.getHTML());
+      setText(props.editor.getText());
     },
   });
 
   const createNote = useMutation(["note.create"], api.note.create.mutate, {
-    onSuccess: (res) => alert(res.message),
+    onSuccess: (res) => alert(res.message), // should redirect to index
     onError: (err: TRPCClientErrorLike<AppRouter>) => {
       if (err.data?.zodError) return alert(formatZodError(err.data.zodError))
       alert(err.message)
     },
   });
 
+  const canSubmitNote: boolean = text.length > 0;
+
   const submitNote = () => {
+    if (!canSubmitNote) return alert("Your note should not be empty");
     createNote.mutate({
-      content,
+      content: HTML,
     });
   };
+
   return (
     <BaseLayout href="/notes/new" title="New">
       <OptionalLayout>
@@ -56,10 +74,11 @@ const NewNote: React.FC = () => {
           if (!user) return <Navigate to="/" />;
           return (
             <div>
-              <RichTextEditor editor={editor} styles={{ root: { border: 0 } }}>
+              <RichTextEditor editor={editor} styles={{ root: { border: 0 } }} className="list-disc">
                 <RichTextEditor.Toolbar sticky stickyOffset={0}>
                   <button
-                    className="z-10 py-3 w-full bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600"
+                    disabled={!canSubmitNote}
+                    className="z-10 py-3 w-full bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 disabled:bg-blue-900"
                     onClick={submitNote}
                   >
                     Adicionar
