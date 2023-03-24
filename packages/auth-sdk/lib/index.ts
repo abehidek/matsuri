@@ -56,4 +56,6 @@ export const authClient = new AuthClient({
   authUrl: env.PUBLIC_AUTH_URL,
 });
 
+export * from './seed';
+
 export { signIn, signOut, me, signUpInputSchema, type SignUpInputSchema, signUp };
