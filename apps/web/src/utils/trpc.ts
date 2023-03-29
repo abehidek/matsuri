@@ -1,4 +1,4 @@
-import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import { TRPCClientErrorLike, createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
 
 // config this when you start using tRPC
@@ -19,3 +19,5 @@ export const api = createTRPCProxyClient<AppRouter>({
     }),
   ],
 });
+
+export type TRPCResponseError = TRPCClientErrorLike<AppRouter>

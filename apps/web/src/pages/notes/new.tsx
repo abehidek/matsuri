@@ -13,10 +13,8 @@ import Placeholder from "@tiptap/extension-placeholder";
 import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list';
 import { useState } from "react";
-import { api } from "../../utils/trpc";
+import { TRPCResponseError, api } from "../../utils/trpc";
 import { useMutation } from "@tanstack/react-query";
-import { TRPCClientErrorLike } from "@trpc/client";
-import { AppRouter } from "../../../../server/src/router/root";
 import { formatZodError } from 'utils'
 
 const NewNote: React.FC = () => {
@@ -52,7 +50,7 @@ const NewNote: React.FC = () => {
 
   const createNote = useMutation(["note.create"], api.note.create.mutate, {
     onSuccess: (res) => alert(res.message), // should redirect to index
-    onError: (err: TRPCClientErrorLike<AppRouter>) => {
+    onError: (err: TRPCResponseError) => {
       if (err.data?.zodError) return alert(formatZodError(err.data.zodError))
       alert(err.message)
     },

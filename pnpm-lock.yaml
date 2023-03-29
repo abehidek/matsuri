@@ -14,7 +14,7 @@ importers:
       dotenv-cli: 7.0.0
     devDependencies:
       eslint-config-custom: link:packages/eslint-config-custom
-      prettier: 2.8.6
+      prettier: 2.8.7
       turbo: 1.8.3
 
   apps/auth:
@@ -157,6 +157,7 @@ importers:
   apps/web:
     specifiers:
       '@emotion/react': ^11.10.6
+      '@headlessui/react': ^1.7.13
       '@hookform/resolvers': ^2.9.11
       '@mantine/core': ^6.0.4
       '@mantine/hooks': ^6.0.4
@@ -210,6 +211,7 @@ importers:
       zod: ^3.21.4
     dependencies:
       '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
+      '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
       '@hookform/resolvers': 2.9.11_react-hook-form@7.43.6
       '@mantine/core': 6.0.4_t7jtalnwvyidfaogp2b564lbfq
       '@mantine/hooks': 6.0.4_react@18.2.0
@@ -339,6 +341,7 @@ importers:
 
   packages/ui:
     specifiers:
+      '@headlessui/react': ^1.7.13
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       autoprefixer: ^10.4.14
@@ -348,9 +351,13 @@ importers:
       prettier: ^2.8.5
       prettier-plugin-tailwindcss: ^0.2.5
       react: ^18.2.0
+      react-dom: ^18.2.0
       tailwindcss: ^3.2.7
       tsconfig: workspace:*
       typescript: ^4.5.2
+    dependencies:
+      '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
+      react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -1216,6 +1223,18 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tabbable: 6.1.1
+    dev: false
+
+  /@headlessui/react/1.7.13_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-9n+EQKRtD9266xIHXdY5MfiXPDfYwl7zBM7KOx2Ae3Gdgxy8QML1FkCMjq6AsOf0l6N9uvI4HcFtuFlenaldKg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@hookform/resolvers/2.9.11_react-hook-form@7.43.6:
@@ -2678,6 +2697,10 @@ packages:
       slice-ansi: 5.0.0
       string-width: 5.1.2
     dev: true
+
+  /client-only/0.0.1:
+    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+    dev: false
 
   /cliui/7.0.4:
     resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
@@ -4911,8 +4934,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.8.6:
-    resolution: {integrity: sha512-mtuzdiBbHwPEgl7NxWlqOkithPyp4VN93V7VeHVWBF+ad3I5avc0RVDT4oImXQy9H/AqxA2NSQH8pSxHW6FYbQ==}
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
