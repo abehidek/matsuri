@@ -3,10 +3,43 @@ import { protectedProcedure, router } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
+const get = protectedProcedure.input(z.object({ id: z.string().min(1) }))
+  .query(async ({ ctx, input }) => {
+    const [note, findErr] = await $try(ctx.prisma.note.findUnique({
+      where: { id: input.id }
+    }))
+
+    if (findErr) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        cause: findErr,
+        message: "Something went wrong when getting your note.",
+      });
+    }
+
+    if (!note) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "No note was found.",
+      });
+    }
+
+    if (note.userId !== ctx.user.id) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You don't have the permission to get this note.",
+      });
+    }
+
+    return {
+      message: "Succesfully retrieve the note.",
+      note
+    }
+  })
+
 const del = protectedProcedure
   .input(z.object({ id: z.string().min(1) }))
   .mutation(async ({ ctx, input }) => {
-    console.log("deleting...");
     const [note, findErr] = await $try(ctx.prisma.note.findUnique({
       where: { id: input.id }
     }))
@@ -108,6 +141,7 @@ const create = protectedProcedure
   });
 
 export const noteRouter = router({
+  get,
   del,
   all,
   create,
