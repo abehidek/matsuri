@@ -63,11 +63,11 @@ Simple overview of use/purpose.
 - [x] feat: finish session-based authentication microservice (see keycloak standards?)
 - [x] chore: shared seed users (for faster development)
 - [ ] chore: add TRPCError-like error handler for express
-- [ ] feat: crud notes (development UI-first w/ tRPC)
+- [x] feat: crud notes (development UI-first w/ tRPC)
   - [x] read all notes
   - [x] add note
-  - [ ] edit note
-  - [ ] delete note
+  - [x] edit note
+  - [x] delete note
   - [x] feat: find/develop a good markdown editor
     - [x] Traditional approach: Mantine Tiptap text editor
     - [x] Notion-like: Yopta-Editor, editor.js and BlockNote

@@ -3,6 +3,58 @@ import { protectedProcedure, router } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
+const edit = protectedProcedure
+  .input(z.object({ 
+    id: z.string().min(1),
+    content: z.string().min(1)
+  }))
+  .mutation(async ({ ctx, input }) => {
+    const [note, findErr] = await $try(ctx.prisma.note.findUnique({
+      where: { id: input.id }
+    }))
+
+    if (findErr) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        cause: findErr,
+        message: "Something went wrong when editing your note.",
+      });
+    }
+
+    if (!note) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "No note was found.",
+      });
+    }
+
+    if (note.userId !== ctx.user.id) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You don't have the permission to edit this note.",
+      });
+    }
+
+    const [_, editErr] = await $try(ctx.prisma.note.update({
+      where: { id: input.id },
+      data: {
+        content: input.content
+      }
+    }))
+
+    if (editErr) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        cause: editErr,
+        message: "Something went wrong when editing your note.",
+      });
+    }
+
+    return {
+      message: "Succesfully edited note.",
+    };
+  })
+
 const get = protectedProcedure.input(z.object({ id: z.string().min(1) }))
   .query(async ({ ctx, input }) => {
     const [note, findErr] = await $try(ctx.prisma.note.findUnique({
@@ -141,6 +193,7 @@ const create = protectedProcedure
   });
 
 export const noteRouter = router({
+  edit,
   get,
   del,
   all,
