@@ -1,4 +1,4 @@
-import { TRPCResponseError, api } from "../utils/trpc";
+import { TRPCResponseError, api, isTRPCResponseError } from "../utils/trpc";
 import { OptionalLayout, User } from "../components/AuthLayout";
 import { BaseLayout } from "../components/BaseLayout";
 import { Link } from "react-router-dom";
@@ -7,7 +7,6 @@ import { Loading } from "../components/Loading";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import { Error } from "../components/Error";
-import { TRPCError } from "@trpc/server";
 import IconOptions from "../assets/icon-options.svg";
 import { Menu } from "@headlessui/react";
 import { formatZodError } from "utils";
@@ -38,7 +37,7 @@ export const MyNotes: React.FC<MyNotesProps> = (props) => {
   if (isLoading) return <Loading />;
 
   if (isError) {
-    if (error instanceof TRPCError) return <Error message={error.message} />;
+    if (isTRPCResponseError(error)) return <Error message={error.message} />;
     console.error(error);
     return <Error message={`Contact the support to get help`} />;
   }

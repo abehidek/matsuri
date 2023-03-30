@@ -21,3 +21,10 @@ export const api = createTRPCProxyClient<AppRouter>({
 });
 
 export type TRPCResponseError = TRPCClientErrorLike<AppRouter>
+
+export const isTRPCResponseError = (error: unknown): error is TRPCResponseError => {
+  if (typeof error === "object" && error && "message" in error && "data" in error && typeof error.data === "object" && error.data && "httpStatus" in error.data) {
+    return true;
+  }
+  return false
+}
