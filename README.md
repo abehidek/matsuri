@@ -52,17 +52,20 @@ Simple overview of use/purpose.
 
 ## Roadmap
 
+- [ ] chore: add TRPCError-like error handler for express
+- [ ] chore: setup CI
+- [ ] tests:
+  - [ ] Auth
+  - [ ] Log
+  - [ ] Server
 - [x] Add this README.
-- [-] chore: setup tests properly
+- [x] chore: setup tests properly
   - [x] server
   - [x] auth
     - [x] basic setup
     - [x] abstraction for testing together in other services
-  - [ ] web
-- [ ] chore: setup CI
 - [x] feat: finish session-based authentication microservice (see keycloak standards?)
 - [x] chore: shared seed users (for faster development)
-- [ ] chore: add TRPCError-like error handler for express
 - [x] feat: crud notes (development UI-first w/ tRPC)
   - [x] read all notes
   - [x] add note
