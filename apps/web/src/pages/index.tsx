@@ -96,6 +96,18 @@ const NoteDropdown: React.FC<{ id: string }> = (props) => {
                 className={`${
                   active && "bg-blue-500"
                 } p-2 rounded whitespace-nowrap`}
+                to={`/notes/show/${props.id}`}
+              >
+                Show
+              </Link>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <Link
+                className={`${
+                  active && "bg-blue-500"
+                } p-2 rounded whitespace-nowrap`}
                 to={`/notes/edit/${props.id}`}
               >
                 Edit
