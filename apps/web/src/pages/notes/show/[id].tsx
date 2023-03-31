@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api, isTRPCResponseError } from "../../../utils/trpc";
 import { Loading } from "../../../components/Loading";
 import { Error } from "../../../components/Error";
+import { NoteDropdown } from "../../../pages";
 
 const ShowNote: React.FC<{ id: string }> = (props) => {
   const { data, error, isError, isLoading } = useQuery(
@@ -25,6 +26,9 @@ const ShowNote: React.FC<{ id: string }> = (props) => {
 
   return (
     <div>
+      <div className="flex justify-end">
+        <NoteDropdown id={data.note.id} />
+      </div>
       <ReactMarkdown
         className="markdown"
         rehypePlugins={[rehypeRaw]}

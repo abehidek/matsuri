@@ -66,7 +66,7 @@ export const MyNotes: React.FC<MyNotesProps> = (props) => {
   );
 };
 
-const NoteDropdown: React.FC<{ id: string }> = (props) => {
+export const NoteDropdown: React.FC<{ id: string }> = (props) => {
   const deleteNote = useMutation(["note.del"], api.note.del.mutate, {
     onSuccess: (res) => alert(res.message),
     onError: (err: TRPCResponseError) => {
